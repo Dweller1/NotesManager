@@ -1,0 +1,14 @@
+/* Note.list.css */
+.note-list {
+  display: grid;
+  gap: 20px;
+}
+
+.note-empty-message {
+  text-align: center;
+  color: #7f8c8d;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
