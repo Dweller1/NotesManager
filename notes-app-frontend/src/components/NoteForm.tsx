@@ -1,40 +1,67 @@
-import { useState } from "react";
-import type { CreateNoteDto } from "../types/Note";
-import "./../styles/Note.form.css"; //
+import { useForm } from "react-hook-form";
+import "./../styles/Note.form.css";
 
 interface NoteFormProps {
-  onSubmit: (note: CreateNoteDto) => void;
+  onSubmit: (note: { title: string; content: string }) => void;
 }
 
 const NoteForm = ({ onSubmit }: NoteFormProps) => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    defaultValues: {
+      title: "",
+      content: "",
+    },
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSubmit({ title, content });
-    setTitle("");
-    setContent("");
-  };
+  const submitHandler = handleSubmit((data) => {
+    onSubmit(data);
+    reset();
+  });
 
   return (
-    <form onSubmit={handleSubmit} className="note-form">
-      <input
-        type="text"
-        placeholder="Заголовок"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        className="note-input"
-        required
-      />
-      <textarea
-        placeholder="Текст нотатки"
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        className="note-textarea"
-        required
-      />
-      <button type="submit" className="note-submit-btn">
+    <form onSubmit={submitHandler} className="form">
+      <div className="inputGroup">
+        <label htmlFor="title" className="label">
+          Заголовок
+        </label>
+        <input
+          id="title"
+          {...register("title", {
+            required: "Заголовок обовʼязковий",
+            minLength: {
+              value: 3,
+              message: "Мінімум 3 символи",
+            },
+          })}
+          className="input"
+        />
+        {errors.title && <p className="error">{errors.title.message}</p>}
+      </div>
+
+      <div className="inputGroup">
+        <label htmlFor="content" className="label">
+          Текст нотатки
+        </label>
+        <textarea
+          id="content"
+          {...register("content", {
+            required: "Текст обовʼязковий",
+            minLength: {
+              value: 5,
+              message: "Мінімум 5 символів",
+            },
+          })}
+          className="textarea"
+        />
+        {errors.content && <p className="error">{errors.content.message}</p>}
+      </div>
+
+      <button type="submit" className="submitButton">
         Додати нотатку
       </button>
     </form>

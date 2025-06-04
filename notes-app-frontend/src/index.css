@@ -16,8 +16,6 @@
   text-decoration: underline;
 }
 
-/* NotFound */
-
 .not-found {
   text-align: center;
   padding: 2rem;
@@ -35,10 +33,7 @@
 .not-found a:hover {
   text-decoration: underline;
 }
-*/
-
-/* Скидання стандартних стилів */
-* {
+*/ * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -46,21 +41,18 @@
 }
 
 body {
-  /* background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); */
   background: #983f3f2b;
   color: #333;
   line-height: 1.6;
   padding: 20px;
 }
 
-/* Контейнер для обмеження ширини */
 .container {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
 }
 
-/* Заголовок додатку */
 .app-title {
   text-align: center;
   margin-bottom: 30px;

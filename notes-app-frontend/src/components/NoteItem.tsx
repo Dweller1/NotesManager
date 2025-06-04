@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Note } from "../types/Note";
-import "./../styles/Note.item.css"; // Імпорт CSS як раніше
+import "./../styles/Note.item.css";
 
 interface NoteItemProps {
   note: Note;
